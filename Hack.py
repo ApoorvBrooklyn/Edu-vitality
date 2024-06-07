@@ -19,6 +19,36 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
 
+# Initialize session state
+if 'selected_app' not in st.session_state:
+    st.session_state['selected_app'] = None
+if 'section_start_time' not in st.session_state:
+    st.session_state['section_start_time'] = None
+if 'section_end_time' not in st.session_state:
+    st.session_state['section_end_time'] = None
+if 'active_section' not in st.session_state:
+    st.session_state['active_section'] = ''
+if 'section_times' not in st.session_state:
+    st.session_state['section_times'] = {}
+if 'quiz_start_time' not in st.session_state:
+    st.session_state['quiz_start_time'] = None
+if 'quiz_duration' not in st.session_state:
+    st.session_state['quiz_duration'] = timedelta(minutes=5)
+if 'current_stage' not in st.session_state:
+    st.session_state['current_stage'] = "Introduction"
+if 'stage1_score' not in st.session_state:
+    st.session_state['stage1_score'] = 0
+if 'stage2_score' not in st.session_state:
+    st.session_state['stage2_score'] = 0
+if 'stage3_score' not in st.session_state:
+    st.session_state['stage3_score'] = 0
+if 'stage1_answers' not in st.session_state:
+    st.session_state['stage1_answers'] = [None] * 4
+if 'stage2_answers' not in st.session_state:
+    st.session_state['stage2_answers'] = [None] * 4
+if 'stage3_answers' not in st.session_state:
+    st.session_state['stage3_answers'] = [None] * 4
+
 # Load the trained model
 model = load_model('learning_preference_model_rnn.h5')
 
