@@ -82,18 +82,18 @@ if selected_stage == "Stage1":
         },
         {
             "question": "What do people do during Diwali?",
-            "options": ["", "Decorate their homes with oil lamps, candles, and colorful rangoli patterns", "Throw colored powders and water at each other", "Fast and pray"],
+            "options": ["", "Decorate their homes with oil lamps, candles, and colorful rangoli patterns", "Throw colored powders and water at each other", "Fast and pray","Sing traditional songs and dance"],
             "correct_answer": "Decorate their homes with oil lamps, candles, and colorful rangoli patterns"
         },
         {
             "question": "What is the significance of Diwali?",
-            "options": ["", "It signifies the victory of light over darkness and good over evil", "It celebrates the harvest season", "It has replaced all other cricket tournaments"],
+            "options": ["", "It signifies the victory of light over darkness and good over evil", "It celebrates the harvest season", "It marks the arrival of spring","It honors the goddess Durga"],
             "correct_answer": "It signifies the victory of light over darkness and good over evil"
         },
         {
-            "question": "Why might cricket be considered a unifying factor in India?",
-            "options": ["", "Because only a few people watch it", "Because it brings together people from different backgrounds", "Because it is only played in schools", "Because it is not well-known outside of India"],
-            "correct_answer": "Because it brings together people from different backgrounds"
+            "question": "How do festivals like Diwali and Holi impact the community",
+            "options": ["", "They create division among people", "They strengthen the bonds of community and family", "They lead to increased pollution", "They cause financial strain"],
+            "correct_answer": "They strengthen the bonds of community and family"
         },
     ]
     for i, q in enumerate(questions, start=1):
