@@ -480,6 +480,11 @@ if st.session_state['selected_app'] == "Quiz":
             st.write(f"ContentType: {content['ContentType']}")
             st.write(f"URL: {content['URL']}")
             st.write(f"Description: {content['Description']}")
+        predicted_preference = predict_learning_preference(input_features)
+        st.write(f"Predicted Learning Preference: {predicted_preference}")
+        if st.button('Go to Chat Application'):
+            st.session_state['selected_app'] = 'Chat'
+            st.experimental_rerun()
             
 
 
