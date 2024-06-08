@@ -332,12 +332,24 @@ if st.session_state['selected_app'] == "Quiz":
         st.write(f"Predicted Learning Preference: {predicted_preference}")
 
 if st.session_state['selected_app'] == "Chat":
+    # def get_pdf_text(pdf_docs):
+    #     text = ""
+    #     for pdf in pdf_docs:
+    #         pdf_reader = PdfReader(pdf)
+    #         for page in pdf_reader.pages:
+    #             text += page.extract_text(encoding='utf-8')
+    #     return text
     def get_pdf_text(pdf_docs):
         text = ""
         for pdf in pdf_docs:
-            pdf_reader = PdfReader(pdf)
-            for page in pdf_reader.pages:
-                text += page.extract_text()
+            with open(pdf, "rb") as file:
+                pdf_reader = PdfReader(file)
+                for page in pdf_reader.pages:
+                    try:
+                        page_text = page.extract_text()
+                        text += page_text.encode('utf-8', errors='replace').decode('utf-8')
+                    except Exception as e:
+                        st.warning(f"An error occurred while processing a page: {e}")
         return text
 
     def get_text_chunks(text):
@@ -375,17 +387,15 @@ if st.session_state['selected_app'] == "Chat":
     #st.set_page_config("Chat PDF")
     st.header("Chat with PDF using Gemini💁")
 
+    pdf_docs = [r"Learners.pdf",r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf1.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf2.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf3.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf4.pdf"]  # List of PDFs to process
+
+    with st.spinner("Processing PDFs..."):
+        raw_text = get_pdf_text(pdf_docs)
+        text_chunks = get_text_chunks(raw_text)
+        get_vector_store(text_chunks)
+        st.success("PDFs Processed")
+
     user_question = st.text_input("Ask a Question from the PDF Files")
 
     if user_question:
         user_input(user_question)
-
-    with st.sidebar:
-        st.title("Menu:")
-        pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True)
-        if st.button("Submit & Process"):
-            with st.spinner("Processing..."):
-                raw_text = get_pdf_text(pdf_docs)
-                text_chunks = get_text_chunks(raw_text)
-                get_vector_store(text_chunks)
-                st.success("Done")
