@@ -197,8 +197,8 @@ if st.session_state['selected_app'] == "Quiz":
             "question": "How do festivals like Diwali and Holi impact the community",
             "options": ["", "They create division among people", "They strengthen the bonds of community and family", "They lead to increased pollution", "They cause financial strain"],
             "correct_answer": "They strengthen the bonds of community and family"
-        },
-        ]
+        },]
+
         for i, q in enumerate(questions, start=1):
             st.header(f"Question {i}")
             st.write(q["question"])
