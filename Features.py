@@ -18,7 +18,8 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
-
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 # Initialize session state
 if 'selected_app' not in st.session_state:
     st.session_state['selected_app'] = None
@@ -330,6 +331,9 @@ if st.session_state['selected_app'] == "Quiz":
 
         predicted_preference = predict_learning_preference(input_features)
         st.write(f"Predicted Learning Preference: {predicted_preference}")
+        if st.button('Go to Chat Application'):
+            st.session_state['selected_app'] = 'Chat'
+            st.experimental_rerun()
 
 if st.session_state['selected_app'] == "Chat":
     # def get_pdf_text(pdf_docs):
@@ -366,12 +370,12 @@ if st.session_state['selected_app'] == "Chat":
         prompt_template = """
         Your are specialized Child Psychologist. You need give answer about how different students may improve their learning Process.
         Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
-        provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
+        provided context just say, trying finding the nearby context in Database, don't provide the wrong answer\n\n
         Context:\n {context}?\n
         Question: \n{question}\n
         Answer:
         """
-        model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.3)
+        model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.8)
         prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
         chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
         return chain
@@ -387,7 +391,7 @@ if st.session_state['selected_app'] == "Chat":
     #st.set_page_config("Chat PDF")
     st.header("Chat with PDF using Gemini💁")
 
-    pdf_docs = [r"Learners.pdf",r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf1.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf2.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf3.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf4.pdf"]  # List of PDFs to process
+    pdf_docs = [r"Learning.pdf",r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf1.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf4.pdf", r"dunloskyimprovinglearning.pdf", r"ED573685.pdf"]  # List of PDFs to process
 
     with st.spinner("Processing PDFs..."):
         raw_text = get_pdf_text(pdf_docs)
