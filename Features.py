@@ -178,26 +178,26 @@ if st.session_state['selected_app'] == "Quiz":
     if selected_stage == "Stage1":
         st.audio("indian_heritage.mp3", start_time=0)
         questions = [
-            {
-                "question": "What is Diwali also known as?",
-                "options": ["", "The Festival of Colors", "The Festival of Lights", "The Festival of Flowers", "The Festival of Music"],
-                "correct_answer": "The Festival of Lights"
-            },
-            {
-                "question": "What do people do during Diwali?",
-                "options": ["", "Decorate their homes with oil lamps, candles, and colorful rangoli patterns", "Throw colored powders and water at each other", "Fast and pray"],
-                "correct_answer": "Decorate their homes with oil lamps, candles, and colorful rangoli patterns"
-            },
-            {
-                "question": "What is the significance of Diwali?",
-                "options": ["", "It signifies the victory of light over darkness and good over evil", "It celebrates the harvest season", "It has replaced all other cricket tournaments"],
-                "correct_answer": "It signifies the victory of light over darkness and good over evil"
-            },
-            {
-                "question": "Why might cricket be considered a unifying factor in India?",
-                "options": ["", "Because only a few people watch it", "Because it brings together people from different backgrounds", "Because it is only played in schools", "Because it is not well-known outside of India"],
-                "correct_answer": "Because it brings together people from different backgrounds"
-            },
+        {
+            "question": "What is Diwali also known as?",
+            "options": ["", "The Festival of Colors", "The Festival of Lights", "The Festival of Flowers", "The Festival of Music"],
+            "correct_answer": "The Festival of Lights"
+        },
+        {
+            "question": "What do people do during Diwali?",
+            "options": ["", "Decorate their homes with oil lamps, candles, and colorful rangoli patterns", "Throw colored powders and water at each other", "Fast and pray","Sing traditional songs and dance"],
+            "correct_answer": "Decorate their homes with oil lamps, candles, and colorful rangoli patterns"
+        },
+        {
+            "question": "What is the significance of Diwali?",
+            "options": ["", "It signifies the victory of light over darkness and good over evil", "It celebrates the harvest season", "It marks the arrival of spring","It honors the goddess Durga"],
+            "correct_answer": "It signifies the victory of light over darkness and good over evil"
+        },
+        {
+            "question": "How do festivals like Diwali and Holi impact the community",
+            "options": ["", "They create division among people", "They strengthen the bonds of community and family", "They lead to increased pollution", "They cause financial strain"],
+            "correct_answer": "They strengthen the bonds of community and family"
+        },
         ]
         for i, q in enumerate(questions, start=1):
             st.header(f"Question {i}")
@@ -357,7 +357,7 @@ if st.session_state['selected_app'] == "Chat":
         return text
 
     def get_text_chunks(text):
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=100000, chunk_overlap=10000)
         chunks = text_splitter.split_text(text)
         return chunks
 
@@ -370,7 +370,7 @@ if st.session_state['selected_app'] == "Chat":
         prompt_template = """
         Your are specialized Child Psychologist. You need give answer about how different students may improve their learning Process.
         Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
-        provided context just say, trying finding the nearby context in Database, don't provide the wrong answer\n\n
+        provided context just say, trying finding the nearby context in Database. Provide some reply\n\n
         Context:\n {context}?\n
         Question: \n{question}\n
         Answer:
