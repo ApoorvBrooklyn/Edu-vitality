@@ -337,9 +337,9 @@ if st.session_state['selected_app'] == "Quiz":
                 "correct_answer": "It signifies the victory of light over darkness and good over evil"
             },
             {
-                "question": "Why might cricket be considered a unifying factor in India?",
-                "options": ["", "Because only a few people watch it", "Because it brings together people from different backgrounds", "Because it is only played in schools", "Because it is not well-known outside of India"],
-                "correct_answer": "Because it brings together people from different backgrounds"
+                "question": "How do festivals like Diwali and Holi impact the community",
+                "options": ["", "They create division among people", "They strengthen the bonds of community and family", "They lead to increased pollution", "They cause financial strain"],
+                "correct_answer": "They strengthen the bonds of community and family"
             },
         ]
         for i, q in enumerate(questions, start=1):
@@ -523,12 +523,12 @@ if st.session_state['selected_app'] == "Chat":
         prompt_template = """
         Your are specialized Child Psychologist. You need give answer about how different students may improve their learning Process.
         Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
-        provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
+        provided context just say, trying finding the nearby context in Database. Provide some reply\n\n
         Context:\n {context}?\n
         Question: \n{question}\n
         Answer:
         """
-        model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.3)
+        model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.8)
         prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
         chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
         return chain
@@ -544,7 +544,7 @@ if st.session_state['selected_app'] == "Chat":
     #st.set_page_config("Chat PDF")
     st.header("Chat with PDF using Gemini💁")
 
-    pdf_docs = [r"Learners.pdf",r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf1.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf2.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf3.pdf", r"C:\Users\HP\Desktop\Edu-Vitality\Edu-vitality\pdf4.pdf"]  # List of PDFs to process
+    pdf_docs = [r"Learning.pdf", r"pdf1.pdf", r"pdf4.pdf", r"dunloskyimprovinglearning.pdf", r"ED573685.pdf"]  # List of PDFs to process
 
     with st.spinner("Processing PDFs..."):
         raw_text = get_pdf_text(pdf_docs)
